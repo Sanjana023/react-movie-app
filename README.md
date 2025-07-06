@@ -44,7 +44,7 @@ This project was built to polish React concepts like state management, context, 
 
 4.**Open in browser**
 
-📌 Notes
+## 📌 Notes :
 This project does not use any backend or database.
 
 You can enhance this project by integrating authentication logic.
