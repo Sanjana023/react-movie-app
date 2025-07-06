@@ -6,14 +6,12 @@ const MovieContext = createContext(); //creating context
 export const useMovieContext = () => useContext(MovieContext);
 
 export const MovieProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState([]);
-  //runs only once on mount
-  useEffect(() => {
+  const [favorites, setFavorites] = useState(() => {
     const storedFavs = localStorage.getItem('favorites');
+    return storedFavs ? JSON.parse(storedFavs) : [];
+  });
 
-    if (storedFavs) setFavorites(JSON.parse(storedFavs));
-  }, []);
-//updates localStorage when favorites change
+  //updates localStorage when favorites change
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
