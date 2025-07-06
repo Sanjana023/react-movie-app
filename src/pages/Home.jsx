@@ -25,10 +25,24 @@ export function Home() {
     loadPopularMovies();
   }, []);
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault(); //prevents page reload
-    alert(searchQuery);
-    setSearchQuery('-------');
+
+    if (!searchQuery.trim()) return; //if query is only spaces
+
+    setLoading(true);
+    if (loading) return;
+
+    try {
+      const searchResults = await searchMovies(searchQuery);
+      setMovies(searchResults);
+      setError(null);
+    } catch (error) {
+      console.log(error);
+      setError('Failed to search movies...');
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="home">
