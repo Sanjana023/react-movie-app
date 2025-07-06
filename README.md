@@ -37,13 +37,23 @@ This project was built to polish React concepts like state management, context, 
    ```
 
 2. **Install dependencies**
-   npm install
+    ```bash
+      npm install
+   
+      ```
 
 3. **Start the development server**
-   npm run dev
+   ```bash
+    npm run dev
 
-4.**Open in browser**
+   ```
 
+4. **Open in browser**
+      ```bash
+             http://localhost:5173
+      ```
+
+     
 ## 📌 Notes :
 This project does not use any backend or database.
 
