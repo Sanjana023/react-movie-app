@@ -1,11 +1,10 @@
-import { MovieCard } from '../components/MovieCard';
-import { useState, useEffect } from 'react';
-import { searchMovies, getPopularMovies } from '../services/api';
-import '../css/Home.css';
+import {MovieCard} from "../components/MovieCard";
+import { useState, useEffect } from "react";
+import { searchMovies, getPopularMovies } from "../services/api";
+import "../css/Home.css";
 
 export function Home() {
-  const [searchQuery, setSearchQuery] = useState('');
-
+  const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,33 +16,33 @@ export function Home() {
         setMovies(popularMovies);
       } catch (err) {
         console.log(err);
-        setError('Failed to load movies...');
+        setError("Failed to load movies...");
       } finally {
         setLoading(false);
       }
     };
+
     loadPopularMovies();
   }, []);
 
   const handleSearch = async (e) => {
-    e.preventDefault(); //prevents page reload
+    e.preventDefault();
+    if (!searchQuery.trim()) return
+    if (loading) return
 
-    if (!searchQuery.trim()) return; //if query is only spaces
-
-    setLoading(true);
-    if (loading) return;
-
+    setLoading(true)
     try {
-      const searchResults = await searchMovies(searchQuery);
-      setMovies(searchResults);
-      setError(null);
-    } catch (error) {
-      console.log(error);
-      setError('Failed to search movies...');
+        const searchResults = await searchMovies(searchQuery)
+        setMovies(searchResults)
+        setError(null)
+    } catch (err) {
+        console.log(err)
+        setError("Failed to search movies...")
     } finally {
-      setLoading(false);
+        setLoading(false)
     }
   };
+
   return (
     <div className="home">
       <form onSubmit={handleSearch} className="search-form">
@@ -53,13 +52,13 @@ export function Home() {
           className="search-input"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-        ></input>
+        />
         <button type="submit" className="search-button">
-          search
+          Search
         </button>
       </form>
 
-      {error && <div className="error-message">{error}</div>}
+        {error && <div className="error-message">{error}</div>}
 
       {loading ? (
         <div className="loading">Loading...</div>
@@ -73,3 +72,5 @@ export function Home() {
     </div>
   );
 }
+
+ 
